@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Night Tide Table</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0B1626;--rail:#08111E;--s:#142A44;--ln:#223B57;--ink:#E3ECF4;--dim:#A3B5C6;--mute:#6B8196;--bl:#3E8EC2;--mg:#E0458F}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1100px;height:720px;overflow:hidden;background:var(--g);color:var(--ink);font:400 14px/1.3 "Inter Tight","Segoe UI",sans-serif;font-variant-numeric:tabular-nums;display:flex}
+nav{width:168px;background:var(--rail);border-right:1px solid var(--ln);padding:22px 12px;display:flex;flex-direction:column}
+nav h1{font-size:17px;font-weight:600;line-height:1.15;padding:0 10px 26px}nav h1 small{display:block;font-size:13px;font-weight:400;color:var(--dim)}
+nav a{display:block;padding:10px 12px;margin-bottom:2px;border-radius:6px;border-left:3px solid transparent;color:var(--dim);font-weight:500;font-size:15px}
+nav a.on{background:var(--s);color:var(--ink);border-left-color:var(--bl)}
+nav .tz{margin-top:auto;padding:0 10px;font-size:12px;color:var(--mute)}
+main{width:932px;display:flex;flex-direction:column}
+header{height:58px;padding:0 28px;display:flex;align-items:center;justify-content:space-between}
+header h2{font-size:22px;font-weight:600}header p{font-size:13px;color:var(--dim)}
+.clk{text-align:right;font-size:26px;font-weight:500;line-height:1}.clk small{display:block;margin-top:3px;font-size:12px;font-weight:400;color:var(--dim)}
+.band{height:176px;padding:2px 28px 0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);background:#0D1B2F}
+.bh{height:26px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--dim)}.bh b{color:var(--ink);font-weight:600}
+svg{display:block;overflow:visible}svg text{font:500 11px "Inter Tight","Segoe UI",sans-serif;fill:var(--dim)}
+.mj{fill:rgba(62,142,194,.22);stroke:var(--bl);stroke-width:1.5}.rg{fill:rgba(62,142,194,.14);stroke:var(--bl);stroke-width:1.2}
+.off{fill:none;stroke:rgba(62,142,194,.45);stroke-width:1.2}.nx{fill:rgba(224,69,143,.3);stroke:var(--mg);stroke-width:2}
+.hrs{display:flex;margin-top:4px;font-size:11px;color:var(--mute)}.hrs span{width:36.5px;padding-left:3px}
+.low{flex:1;padding:0 28px;display:grid;grid-template-columns:328.5px 511px;column-gap:36.5px;background:repeating-linear-gradient(90deg,rgba(62,142,194,.075) 0 1px,transparent 1px 36.5px);background-origin:content-box;background-clip:content-box}
+.card{margin:18px 0 16px;background:var(--s);border:1px solid var(--ln);border-top:3px solid var(--mg);border-radius:8px;padding:16px 22px 20px;box-shadow:0 14px 34px rgba(0,0,0,.4);display:flex;flex-direction:column}
+.tag{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--mg);display:flex;justify-content:space-between}.tag span{color:var(--dim);letter-spacing:0;font-weight:500}
+.cd{font-size:132px;font-weight:600;line-height:1;letter-spacing:-.03em;margin:6px 0 0 -4px}
+.unit{font-size:12px;color:var(--dim);padding-bottom:14px;border-bottom:1px solid var(--ln)}
+.card h3{font-size:30px;font-weight:600;line-height:1.1;margin-top:16px}
+.meta{font-size:15px;color:var(--dim);margin-top:6px}.meta b{color:var(--mg);font-weight:600}
+.ctl{margin-top:auto;display:grid;gap:11px;font-size:13px;color:var(--dim)}
+.row{display:flex;align-items:center;gap:10px}.row>span:first-of-type{width:44px}.row span.lbl{width:auto;color:var(--ink);white-space:nowrap}
+.sw{width:34px;height:20px;border-radius:10px;background:var(--mg);position:relative}.sw:after{content:"";position:absolute;right:3px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--g)}
+.sl{flex:1;height:4px;border-radius:2px;background:var(--ln);position:relative}.sl b{position:absolute;inset:0 auto 0 0;width:80%;border-radius:2px;background:var(--bl)}
+.sl:after{content:"";position:absolute;left:80%;top:-5px;margin-left:-7px;width:14px;height:14px;border-radius:50%;background:var(--ink)}
+button{font:600 13px "Inter Tight","Segoe UI",sans-serif;padding:9px 14px;border-radius:6px;border:1px solid var(--ln);background:transparent;color:var(--ink)}button.p{background:var(--bl);border-color:var(--bl);color:#06101C}
+.alm{margin:18px 0 16px}.ah{display:flex;justify-content:space-between;align-items:baseline;height:30px;font-size:12px;color:var(--mute)}.ah h3{font-size:16px;font-weight:600;color:var(--ink)}
+.cols{display:grid;grid-template-columns:255.5px 255.5px}ol{list-style:none}ol+ol{border-left:1px solid var(--ln)}
+ol li{display:flex;min-height:30px;padding:6px 8px 6px 0;border-top:1px solid rgba(34,59,87,.8);font-size:13.5px;line-height:17px;color:var(--dim)}ol+ol li{padding-left:0}
+li time{width:46px;flex:none;font-weight:600;color:var(--ink)}li span{flex:1;padding-left:2px}li b{font-weight:600;color:var(--ink)}
+li.n time{color:var(--mg)}li.o,li.o time{color:var(--mute);font-weight:400}
+li em{font:400 11px/1 "Inter Tight",sans-serif;margin-left:6px;padding:2px 6px;border:1px solid var(--ln);border-radius:8px}
+.w:after{content:"";display:inline-block;width:7px;height:7px;margin-left:5px;border:1.5px solid var(--ink);border-radius:50%}
+footer{height:32px;padding:0 28px;border-top:1px solid var(--ln);display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}footer i{width:7px;height:7px;border-radius:50%;background:var(--bl)}
+</style></head><body>
+<nav><h1>Melissia<small>Boss Timer</small></h1><a class="on">Schedule</a><a>Bosses</a><a>Sounds</a><a>Settings</a><div class="tz">Local time<br>UTC+07:00</div></nav>
+<main>
+<header><div><h2>Schedule</h2><p>Wednesday 14 Oct · spawns converted to your local time</p></div><div class="clk">04:52:12<small>UTC+07:00</small></div></header>
+<section class="band">
+<div class="bh"><span><b>Tide band</b> · 05:00 to 04:59 · crest height = boss rank</span><span>tall = major · low = regular · dashed = alarm off</span></div>
+<svg width="876" height="120" viewBox="0 0 876 120" aria-label="24 hour spawn band">
+<defs><path id="m" d="M-9 0C-4 0-4-64 0-64S4 0 9 0Z"/><path id="r" d="M-4 0C-2 0-2-16 0-16S2 0 4 0Z"/></defs>
+<g transform="translate(0 104)">
+<g class="off" stroke-dasharray="2 2"><use href="#r" x="9.1"/><use href="#r" x="27.4"/><use href="#r" x="155.1"/><use href="#r" x="173.4"/><use href="#r" x="301.1"/><use href="#r" x="319.4"/></g>
+<g class="rg"><use href="#r" x="18.3"/><use href="#r" x="146"/><use href="#r" x="164.3"/><use href="#r" x="730"/></g>
+<g class="mj"><use href="#m" x="292"/><use href="#m" x="310.3"/><use href="#m" x="328.5"/><use href="#m" x="401.5"/><use href="#m" x="438"/><use href="#m" x="474.5"/><use href="#m" x="529.3"/><use href="#m" x="547.5"/><use href="#m" x="584"/><use href="#m" x="620.5"/><use href="#m" x="657"/><use href="#m" x="748.3"/><use href="#m" x="821.3"/></g>
+<use class="nx" href="#m" x="0"/></g>
+<path d="M0 104H876" stroke="#3E8EC2" stroke-opacity=".6"/>
+<line x1="-.5" x2="876" y1="108" y2="108" stroke="#6B8196" stroke-width="8" stroke-dasharray="1 35.5"/>
+<line x1="-.5" x2="876" y1="111" y2="111" stroke="#A3B5C6" stroke-width="14" stroke-dasharray="1 108.5"/>
+<text x="-4" y="31" style="fill:#E0458F;font-weight:700;font-size:12px">05:00 Kzarka · Bulgasal</text>
+<text x="337" y="31" text-anchor="end">Targargo · Katzvariak · Giant Mudster</text>
+<text x="438" y="31" text-anchor="middle">Vell</text><text x="476" y="31" text-anchor="middle">Kzarka</text>
+<text x="626" y="31" text-anchor="end">Karanda</text><text x="657" y="31" text-anchor="middle">Garmoth</text>
+<text x="830" y="31" text-anchor="end">Thundercloud Ancient Kutum</text>
+<path d="M-4.9 16V104" stroke="#E3ECF4" stroke-width="1.5"/><text x="-1" y="11" style="fill:#E3ECF4;font-weight:700">NOW 04:52</text>
+</svg>
+<div class="hrs"><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>00</span><span>01</span><span>02</span><span>03</span><span>04</span></div>
+</section>
+<section class="low">
+<article class="card">
+<div class="tag">NEXT SPAWN<span>at 05:00</span></div>
+<div class="cd">7:48</div><div class="unit">minutes : seconds</div>
+<h3>Kzarka · Bulgasal</h3>
+<p class="meta">05:00 · <b>alarm 04:55</b> · War Horn</p>
+<div class="ctl">
+<div class="row"><i class="sw"></i><span class="lbl">Alarm 5 min before</span></div>
+<div class="row"><span>Volume</span><div class="sl"><b></b></div><span style="width:auto">80%</span></div>
+<div class="row"><button class="p">Test sound</button><button>Change sound</button></div>
+</div>
+</article>
+<section class="alm">
+<div class="ah"><h3>Upcoming</h3><span>ring = wanted · dim = alarm off</span></div>
+<div class="cols">
+<ol>
+<li class="n"><time>05:00</time><span><b class="w">Kzarka</b>, Bulgasal</span></li>
+<li class="o"><time>05:15</time><span>Uturi<em>alarm off</em></span></li>
+<li><time>05:30</time><span>Golden Pig King</span></li>
+<li class="o"><time>05:45</time><span>Sangoon<em>alarm off</em></span></li>
+<li><time>09:00</time><span>Bulgasal</span></li>
+<li class="o"><time>09:15</time><span>Uturi<em>alarm off</em></span></li>
+<li><time>09:30</time><span>Golden Pig King</span></li>
+<li class="o"><time>09:45</time><span>Sangoon<em>alarm off</em></span></li>
+<li><time>13:00</time><span><b>Targargo</b>, Bulgasal</span></li>
+<li class="o"><time>13:15</time><span>Uturi<em>alarm off</em></span></li>
+<li><time>13:30</time><span><b>Katzvariak</b>, Golden Pig King</span></li>
+<li class="o"><time>13:45</time><span>Sangoon<em>alarm off</em></span></li>
+</ol><ol>
+<li><time>14:00</time><span><b>Giant Mudster</b>, <b>Red Nose</b></span></li>
+<li><time>16:00</time><span><b>Stormbringer Karanda</b></span></li>
+<li><time>17:00</time><span><b class="w">Vell</b>, Bulgasal</span></li>
+<li><time>18:00</time><span><b class="w">Kzarka</b></span></li>
+<li><time>19:30</time><span><b>Quint</b>, <b>Muraka</b></span></li>
+<li><time>20:00</time><span><b>Ancient Kutum</b></span></li>
+<li><time>21:00</time><span><b>Targargo</b>, Bulgasal</span></li>
+<li><time>22:00</time><span><b>Karanda</b></span></li>
+<li><time>23:00</time><span><b class="w">Garmoth</b></span></li>
+<li><time>01:00</time><span>Bulgasal</span></li>
+<li><time>01:30</time><span><b>Giant Mudster</b>, <b>Red Nose</b>, Golden Pig King</span></li>
+<li><time>03:30</time><span><b>Thundercloud Ancient Kutum</b></span></li>
+</ol></div></section>
+</section>
+<footer><i></i>PC time zone UTC+07:00 (Bangkok, Hanoi, Jakarta) · schedule from wiki, checked 04:31 · times on wiki are GMT</footer>
+</main></body></html>

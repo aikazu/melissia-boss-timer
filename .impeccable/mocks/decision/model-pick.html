@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Melissia Boss Timer - Match-Day Broadcast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#0A0F1F; --ink:#F2F4F8; --blue:#2E6BFF; --gold:#FFC53D; --card:#111833; --chip:#1E2958; --mute:#8791B0; --line:#1D2750; --rail:#070B17; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { width:1100px; height:720px; overflow:hidden; background:var(--bg); color:var(--ink);
+  font:500 14px/1.3 Barlow,"Segoe UI",sans-serif; font-variant-numeric:tabular-nums;
+  display:grid; grid-template-columns:176px 1fr 264px; grid-template-rows:172px 1fr 28px; }
+.c, h1, h2, .rail a, .brand { font-family:"Barlow Condensed","Arial Narrow",sans-serif; text-transform:uppercase; }
+
+/* Left nav rail */
+.rail { grid-row:1 / 3; background:var(--rail); padding:18px 0 16px; display:flex; flex-direction:column; }
+.brand { font-weight:800; font-size:24px; line-height:.95; padding:0 16px 22px; letter-spacing:.02em; }
+.brand span { color:var(--blue); }
+.rail a { display:block; padding:11px 16px; margin-right:14px; font-weight:700; font-size:22px; letter-spacing:.04em; color:var(--mute); text-decoration:none; }
+.rail a[aria-current] { background:var(--blue); color:#fff; font-weight:800; clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%); }
+.now { margin-top:auto; padding:0 16px; }
+.now b { display:block; font:800 38px/1 "Barlow Condensed"; letter-spacing:.02em; }
+.now span { font-size:12px; color:var(--mute); }
+
+/* NEXT UP lower-third */
+.ban { grid-column:2 / 4; position:relative; overflow:hidden; }
+.ban .gold, .ban .blue { position:absolute; left:0; top:0; bottom:0; clip-path:polygon(0 0,100% 0,calc(100% - 56px) 100%,0 100%); }
+.ban .gold { width:654px; background:var(--gold); }
+.ban .blue { width:640px; background:var(--blue); color:#fff; padding:14px 84px 0 24px; }
+.tagrow { display:flex; align-items:center; gap:12px; height:26px; }
+.tag { background:var(--gold); color:#0A0F1F; font:800 18px/26px "Barlow Condensed"; letter-spacing:.1em; padding:0 12px; transform:skewX(-12deg); }
+.tagrow .meta { font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+h1 { font-weight:800; font-size:74px; line-height:.95; margin-top:8px; letter-spacing:.01em; white-space:nowrap; }
+h1 i { font-style:normal; color:var(--gold); }
+.sub { display:flex; align-items:baseline; gap:14px; margin-top:6px; }
+.sub b { font:700 40px/1 "Barlow Condensed"; }
+.sub span { font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+.cd { position:absolute; left:672px; right:0; top:0; bottom:0; padding:14px 0 0 14px; }
+.cd small { display:block; font:700 15px/1 "Barlow Condensed"; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
+.cd b { display:block; font:800 112px/.9 "Barlow Condensed"; color:var(--gold); margin-top:6px; letter-spacing:.01em; }
+
+/* Fixture list */
+.main { padding:14px 20px 0; }
+.top { display:flex; justify-content:space-between; align-items:center; height:32px; margin-bottom:6px; }
+.top h2 { font-weight:700; font-size:24px; letter-spacing:.04em; }
+.legend { display:flex; gap:8px; }
+.cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; }
+.col { display:flex; flex-direction:column; gap:12px; }
+.card { background:var(--card); }
+.card h3 { display:flex; justify-content:space-between; align-items:baseline; padding:3px 10px 3px 8px; height:28px;
+  background:#18214A; border-left:4px solid var(--blue); font:700 19px/22px "Barlow Condensed"; text-transform:uppercase; letter-spacing:.05em; }
+.card h3 span { font:500 13px Barlow; color:var(--mute); letter-spacing:.02em; }
+.r { display:flex; align-items:center; gap:10px; min-height:27px; padding:2px 10px 2px 12px; border-top:1px solid var(--line); }
+.r time { flex:none; width:46px; font:700 21px/1 "Barlow Condensed"; letter-spacing:.02em; }
+.chips { display:flex; flex-wrap:wrap; gap:5px; }
+.k { padding:1px 7px; font:600 12.5px/17px Barlow; background:var(--chip); }
+.k.m { background:var(--blue); color:#fff; }
+.k.o { background:transparent; color:#7F89AA; border:1px dashed #36427A; padding:0 6px; }
+.r.n { background:#2A2310; border-left:4px solid var(--gold); padding-left:8px; }
+.r.n time { color:var(--gold); }
+.r.n em { margin-left:auto; font:800 12px/16px "Barlow Condensed"; letter-spacing:.1em; background:var(--gold); color:#0A0F1F; padding:0 6px; font-style:normal; }
+
+/* Alarm side panel */
+.panel { background:#0D1430; border-left:1px solid var(--line); padding:14px 16px; display:flex; flex-direction:column; gap:14px; }
+.panel h2 { font-weight:700; font-size:24px; letter-spacing:.04em; }
+.next { border-left:4px solid var(--gold); background:#2A2310; padding:8px 12px; }
+.next small, .f label { display:block; font:700 13px/1 "Barlow Condensed"; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
+.next b { display:block; font:800 46px/1 "Barlow Condensed"; color:var(--gold); margin:4px 0 2px; }
+.f label { margin-bottom:6px; }
+.sel { display:flex; justify-content:space-between; align-items:center; height:36px; padding:0 12px; background:#111A3C; border:1px solid #2A3668; font-size:15px; font-weight:600; }
+.sel::after { content:""; width:7px; height:7px; border-right:2px solid var(--mute); border-bottom:2px solid var(--mute); transform:rotate(45deg) translate(-2px,-2px); }
+.row { display:flex; gap:8px; }
+.btn { flex:none; height:36px; padding:0 14px; line-height:34px; background:var(--blue); font:700 15px/36px "Barlow Condensed"; text-transform:uppercase; letter-spacing:.08em; }
+.sl { display:flex; align-items:center; gap:12px; height:24px; }
+.sl .tr { flex:1; height:6px; background:#2A3668; position:relative; }
+.sl .tr i { display:block; width:80%; height:100%; background:var(--blue); }
+.sl .tr u { position:absolute; left:80%; top:-6px; width:10px; height:18px; margin-left:-5px; background:#fff; }
+.sl b { font:800 22px/1 "Barlow Condensed"; width:40px; text-align:right; }
+.al { display:flex; justify-content:space-between; align-items:center; height:30px; border-top:1px solid var(--line); font-size:14px; font-weight:600; }
+.al.off { color:#7F89AA; }
+.tg { width:36px; height:18px; background:#2A3668; position:relative; }
+.tg::after { content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; background:#8791B0; }
+.tg.on { background:var(--blue); }
+.tg.on::after { left:20px; background:#fff; }
+
+.foot { grid-column:1 / 4; background:var(--rail); padding:0 16px; line-height:28px; font-size:12px; color:var(--mute); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<nav class="rail" aria-label="Main">
+  <div class="brand">Melissia<br><span>Boss Timer</span></div>
+  <a aria-current="page">Schedule</a>
+  <a>Bosses</a>
+  <a>Sounds</a>
+  <a>Settings</a>
+  <div class="now"><b>04:52:12</b><span>WED 14 OCT · UTC+07:00</span></div>
+</nav>
+
+<header class="ban" aria-label="Next up">
+  <i class="gold"></i>
+  <div class="blue">
+    <div class="tagrow"><span class="tag">Next up</span><span class="meta">Wed 14 Oct · local time</span></div>
+    <h1>Kzarka <i>·</i> Bulgasal</h1>
+    <div class="sub"><b>05:00</b><span>Spawn · alarm fires 04:55 · War Horn</span></div>
+  </div>
+  <div class="cd"><small>Starts in</small><b>07:48</b></div>
+</header>
+
+<main class="main">
+  <div class="top">
+    <h2>Fixtures · local time</h2>
+    <div class="legend"><span class="k m">Major</span><span class="k">Regular</span><span class="k o">Alarm off</span></div>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <section class="card"><h3>Dawn <span>05:00–05:45</span></h3>
+        <div class="r n"><time>05:00</time><div class="chips"><span class="k m">Kzarka</span><span class="k">Bulgasal</span></div><em>Next</em></div>
+        <div class="r"><time>05:15</time><div class="chips"><span class="k o">Uturi</span></div></div>
+        <div class="r"><time>05:30</time><div class="chips"><span class="k">Golden Pig King</span></div></div>
+        <div class="r"><time>05:45</time><div class="chips"><span class="k o">Sangoon</span></div></div>
+      </section>
+      <section class="card"><h3>Morning <span>09:00–09:45</span></h3>
+        <div class="r"><time>09:00</time><div class="chips"><span class="k">Bulgasal</span></div></div>
+        <div class="r"><time>09:15</time><div class="chips"><span class="k o">Uturi</span></div></div>
+        <div class="r"><time>09:30</time><div class="chips"><span class="k">Golden Pig King</span></div></div>
+        <div class="r"><time>09:45</time><div class="chips"><span class="k o">Sangoon</span></div></div>
+      </section>
+      <section class="card"><h3>Night <span>01:00–03:30 · tomorrow</span></h3>
+        <div class="r"><time>01:00</time><div class="chips"><span class="k">Bulgasal</span></div></div>
+        <div class="r"><time>01:30</time><div class="chips"><span class="k m">Giant Mudster</span><span class="k m">Red Nose</span><span class="k">Golden Pig King</span></div></div>
+        <div class="r"><time>03:30</time><div class="chips"><span class="k m">Thundercloud Ancient Kutum</span></div></div>
+      </section>
+    </div>
+    <div class="col">
+      <section class="card"><h3>Afternoon <span>13:00–17:00</span></h3>
+        <div class="r"><time>13:00</time><div class="chips"><span class="k m">Targargo</span><span class="k">Bulgasal</span></div></div>
+        <div class="r"><time>13:15</time><div class="chips"><span class="k o">Uturi</span></div></div>
+        <div class="r"><time>13:30</time><div class="chips"><span class="k m">Katzvariak</span><span class="k">Golden Pig King</span></div></div>
+        <div class="r"><time>13:45</time><div class="chips"><span class="k o">Sangoon</span></div></div>
+        <div class="r"><time>14:00</time><div class="chips"><span class="k m">Giant Mudster</span><span class="k m">Red Nose</span></div></div>
+        <div class="r"><time>16:00</time><div class="chips"><span class="k m">Stormbringer Karanda</span></div></div>
+        <div class="r"><time>17:00</time><div class="chips"><span class="k m">Vell</span><span class="k">Bulgasal</span></div></div>
+      </section>
+      <section class="card"><h3>Evening <span>18:00–23:00</span></h3>
+        <div class="r"><time>18:00</time><div class="chips"><span class="k m">Kzarka</span></div></div>
+        <div class="r"><time>19:30</time><div class="chips"><span class="k m">Quint</span><span class="k m">Muraka</span></div></div>
+        <div class="r"><time>20:00</time><div class="chips"><span class="k m">Ancient Kutum</span></div></div>
+        <div class="r"><time>21:00</time><div class="chips"><span class="k m">Targargo</span><span class="k">Bulgasal</span></div></div>
+        <div class="r"><time>22:00</time><div class="chips"><span class="k m">Karanda</span></div></div>
+        <div class="r"><time>23:00</time><div class="chips"><span class="k m">Garmoth</span></div></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<aside class="panel" aria-label="Alarm settings">
+  <h2>Alarm</h2>
+  <div class="next"><small>Next alarm fires</small><b>04:55</b><span>Kzarka · Bulgasal</span></div>
+  <div class="f"><label>Alert before</label><div class="sel">5 minutes before</div></div>
+  <div class="f"><label>Sound</label><div class="row"><div class="sel" style="flex:1">War Horn</div><div class="btn">Test</div></div></div>
+  <div class="f"><label>Volume</label>
+    <div class="sl" role="slider" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><div class="tr"><i></i><u></u></div><b>80%</b></div></div>
+  <div class="f"><label>Alarms by boss</label>
+    <div class="al">Major bosses + Bulgasal, Golden Pig King<div class="tg on"></div></div>
+    <div class="al off">Uturi<div class="tg"></div></div>
+    <div class="al off">Sangoon<div class="tg"></div></div>
+  </div>
+</aside>
+
+<footer class="foot">PC time zone UTC+07:00 (Bangkok, Hanoi, Jakarta) · schedule from wiki, checked 04:31 · times on wiki are GMT</footer>
+
+</body>
+</html>

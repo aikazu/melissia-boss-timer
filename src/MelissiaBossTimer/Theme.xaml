@@ -1,0 +1,534 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:MelissiaBossTimer.Controls">
+
+    <!-- Palette: black night ground, white ink, one live red. -->
+    <Color x:Key="RedColor">#E5191C</Color>
+    <Color x:Key="InkColor">#FFFFFF</Color>
+    <SolidColorBrush x:Key="Red" Color="{StaticResource RedColor}" />
+    <SolidColorBrush x:Key="RedDeep" Color="#9E0F12" />
+    <SolidColorBrush x:Key="Ground" Color="#0B0B0D" />
+    <SolidColorBrush x:Key="Rail" Color="#050506" />
+    <SolidColorBrush x:Key="Surface" Color="#18181B" />
+    <SolidColorBrush x:Key="Surface2" Color="#222226" />
+    <SolidColorBrush x:Key="Line" Color="#34343A" />
+    <SolidColorBrush x:Key="Ink" Color="{StaticResource InkColor}" />
+    <SolidColorBrush x:Key="Mute" Color="#B4B4BC" />
+    <SolidColorBrush x:Key="Dim" Color="#8A8A94" />
+    <SolidColorBrush x:Key="Off" Color="#3A3A40" />
+
+    <FontFamily x:Key="Display">pack://application:,,,/Fonts/#Anton</FontFamily>
+    <FontFamily x:Key="Numerals">pack://application:,,,/Fonts/#Barlow Condensed</FontFamily>
+    <FontFamily x:Key="Body">pack://application:,,,/Fonts/#Barlow</FontFamily>
+    <FontFamily x:Key="Icons">Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
+
+    <!-- Halftone dots, drawn as vector so no raster ships. -->
+    <DrawingBrush x:Key="Halftone" TileMode="Tile" Viewport="0,0,7,7" ViewportUnits="Absolute" Stretch="None">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="#000000">
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <RectangleGeometry Rect="0,0,7,7" />
+                        <EllipseGeometry Center="3.5,3.5" RadiusX="1.7" RadiusY="1.7" />
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="HalftoneWhite" TileMode="Tile" Viewport="0,0,6,6" ViewportUnits="Absolute" Stretch="None">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="#FFFFFF">
+                <GeometryDrawing.Geometry>
+                    <EllipseGeometry Center="3,3" RadiusX="1.1" RadiusY="1.1" />
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <!-- Text roles -->
+    <Style x:Key="PageTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Display}" />
+        <Setter Property="FontSize" Value="34" />
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <SkewTransform AngleX="-6" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SectionTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Display}" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+    </Style>
+
+    <Style x:Key="FieldLabel" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Numerals}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource Mute}" />
+        <Setter Property="Margin" Value="0,0,0,6" />
+    </Style>
+
+    <Style x:Key="BodyText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Body}" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource Mute}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="Time" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Numerals}" />
+        <Setter Property="FontWeight" Value="ExtraBold" />
+        <Setter Property="Typography.NumeralAlignment" Value="Tabular" />
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+    </Style>
+
+    <!-- Left rail menu word: active item sits on a jagged red shard with a white cut behind it. -->
+    <Style x:Key="NavItem" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource Dim}" />
+        <Setter Property="FontFamily" Value="{StaticResource Display}" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Height="50" Margin="0,1,0,1" Background="Transparent" ClipToBounds="False">
+                        <c:Shard x:Name="Cut" Points="0,0.15 1,0 0.9,1 0,0.92" Fill="{StaticResource Ink}" Margin="6,6,4,-2" Opacity="0" />
+                        <c:Shard x:Name="Shard" Points="0,0.1 1,0 0.93,0.86 0,1" Fill="{StaticResource Red}" Margin="0,0,14,4" Opacity="0">
+                            <c:Shard.RenderTransform>
+                                <TranslateTransform x:Name="Slide" X="-40" />
+                            </c:Shard.RenderTransform>
+                        </c:Shard>
+                        <c:Shard x:Name="FocusRing" Points="0,0.1 1,0 0.93,0.86 0,1" Stroke="{StaticResource Ink}" StrokeThickness="2" StrokeDashArray="2 2" Margin="0,0,14,4" Visibility="Collapsed" />
+                        <ContentPresenter Margin="20,0,0,4" VerticalAlignment="Center">
+                            <ContentPresenter.RenderTransform>
+                                <RotateTransform Angle="-4" />
+                            </ContentPresenter.RenderTransform>
+                        </ContentPresenter>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource Ink}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="FocusRing" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource Ink}" />
+                            <Setter TargetName="Shard" Property="Opacity" Value="1" />
+                            <Setter TargetName="Cut" Property="Opacity" Value="1" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Slide" Storyboard.TargetProperty="X" From="-40" To="0" Duration="0:0:0.14">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut" Exponent="6" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Buttons: parallelograms on a white cut. Hover inverts plate to white and the cut to red, the Persona selection move. -->
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="Background" Value="{StaticResource Red}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="FontFamily" Value="{StaticResource Numerals}" />
+        <Setter Property="FontWeight" Value="ExtraBold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Padding" Value="20,8" />
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="Root" Background="Transparent">
+                        <!-- The white cut under a solid plate is what headings never have: it marks a button. -->
+                        <c:Shard x:Name="Cut" Points="0.06,0 1,0 0.94,1 0,1" Fill="{StaticResource Ink}" Margin="4,4,-4,-4" Visibility="Collapsed" />
+                        <c:Shard x:Name="Plate" Points="0.06,0 1,0 0.94,1 0,1" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="2" />
+                        <c:Shard x:Name="FocusRing" Points="0.06,0 1,0 0.94,1 0,1" Stroke="{StaticResource Ink}" StrokeThickness="2" StrokeDashArray="2 2" Margin="-4" Visibility="Collapsed" />
+                        <ContentPresenter x:Name="Label" Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="BorderBrush" Value="{x:Null}">
+                            <Setter TargetName="Cut" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Plate" Property="Fill" Value="{StaticResource Ink}" />
+                            <Setter TargetName="Plate" Property="Stroke" Value="{StaticResource Ink}" />
+                            <Setter TargetName="Cut" Property="Fill" Value="{StaticResource Red}" />
+                            <Setter TargetName="Label" Property="TextElement.Foreground" Value="{StaticResource Ground}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Root" Property="RenderTransform">
+                                <Setter.Value>
+                                    <TranslateTransform X="2" Y="2" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="FocusRing" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Plate" Property="Fill" Value="{StaticResource Off}" />
+                            <Setter TargetName="Plate" Property="Stroke" Value="{x:Null}" />
+                            <Setter TargetName="Cut" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Label" Property="TextElement.Foreground" Value="{StaticResource Dim}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Secondary action: white outline on the ground, so it never reads as a heading; hover fills white. -->
+    <Style x:Key="GhostButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource Ink}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Padding" Value="18,7" />
+    </Style>
+
+    <!-- Square icon button for row actions (preview, delete). -->
+    <Style x:Key="IconButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="Background" Value="{StaticResource Surface2}" />
+        <Setter Property="FontFamily" Value="{StaticResource Icons}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Width" Value="38" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="Transparent">
+                        <c:Shard x:Name="Plate" Points="0.12,0 1,0 0.88,1 0,1" Fill="{TemplateBinding Background}" />
+                        <c:Shard x:Name="FocusRing" Points="0.12,0 1,0 0.88,1 0,1" Stroke="{StaticResource Ink}" StrokeThickness="2" StrokeDashArray="2 2" Margin="-3" Visibility="Collapsed" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Plate" Property="Fill" Value="{StaticResource Red}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="FocusRing" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.35" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LinkButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="FontFamily" Value="{StaticResource Body}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Rectangle x:Name="FocusRing" Stroke="{StaticResource Ink}" StrokeThickness="1" StrokeDashArray="2 2" Margin="-4,-2" Visibility="Collapsed" />
+                        <TextBlock x:Name="Text" Text="{TemplateBinding Content}" TextDecorations="Underline" Foreground="{TemplateBinding Foreground}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Text" Property="Foreground" Value="{StaticResource Red}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="FocusRing" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- On/off switch: a skewed track; on = red with a white block. Label sits left. -->
+    <Style x:Key="Switch" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="FontFamily" Value="{StaticResource Body}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <DockPanel Background="Transparent" LastChildFill="True" MinHeight="32">
+                        <Grid DockPanel.Dock="Right" Width="48" Height="22" VerticalAlignment="Center">
+                            <c:Shard x:Name="Track" Points="0.12,0 1,0 0.88,1 0,1" Fill="{StaticResource Off}" />
+                            <c:Shard x:Name="FocusRing" Points="0.12,0 1,0 0.88,1 0,1" Stroke="{StaticResource Ink}" StrokeThickness="2" StrokeDashArray="2 2" Margin="-4" Visibility="Collapsed" />
+                            <Rectangle x:Name="Knob" Width="18" Height="14" Fill="{StaticResource Mute}" HorizontalAlignment="Left" Margin="6,0,0,0">
+                                <Rectangle.RenderTransform>
+                                    <TranslateTransform x:Name="KnobX" />
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                        <ContentPresenter VerticalAlignment="Center" Margin="0,0,12,0" />
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Track" Property="Fill" Value="{StaticResource Red}" />
+                            <Setter TargetName="Knob" Property="Fill" Value="{StaticResource Ink}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="KnobX" Storyboard.TargetProperty="X" To="18" Duration="0:0:0.12">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut" Exponent="5" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="KnobX" Storyboard.TargetProperty="X" To="0" Duration="0:0:0.12">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ExponentialEase EasingMode="EaseOut" Exponent="5" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Track" Property="Stroke" Value="{StaticResource Ink}" />
+                            <Setter TargetName="Track" Property="StrokeThickness" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="FocusRing" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ComboBox: skewed box, black popup, highlighted item inverts to red. -->
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="FontFamily" Value="{StaticResource Body}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="Bd" Padding="14,8" Background="Transparent">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Surface2}" />
+                        </Trigger>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource Red}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ComboBox">
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="FontFamily" Value="{StaticResource Body}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="MaxDropDownHeight" Value="320" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <c:Shard x:Name="Box" Points="0.03,0 1,0 0.97,1 0,1" Fill="{StaticResource Surface2}" Stroke="{StaticResource Line}" StrokeThickness="1" />
+                        <Path HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,16,0" Data="M0,0 L10,0 L5,6 Z" Fill="{StaticResource Ink}" IsHitTestVisible="False" />
+                        <ToggleButton Focusable="False" ClickMode="Press"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border Background="Transparent" />
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                        <ContentPresenter IsHitTestVisible="False" Margin="16,0,36,0" VerticalAlignment="Center"
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" />
+                        <Popup x:Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" VerticalOffset="2"
+                               AllowsTransparency="True" Focusable="False" PopupAnimation="None">
+                            <Border Background="{StaticResource Ground}" BorderBrush="{StaticResource Red}" BorderThickness="2"
+                                    MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <ScrollViewer>
+                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="Stroke" Value="{StaticResource Ink}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Box" Property="Stroke" Value="{StaticResource Ink}" />
+                            <Setter TargetName="Box" Property="StrokeThickness" Value="2" />
+                            <Setter TargetName="Box" Property="StrokeDashArray" Value="2 2" />
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter TargetName="Box" Property="Stroke" Value="{StaticResource Red}" />
+                            <Setter TargetName="Box" Property="StrokeDashArray" Value="{x:Null}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Slider: red fill, grey rest, white parallelogram thumb. -->
+    <Style x:Key="SliderTrackFill" TargetType="RepeatButton">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Grid Background="Transparent">
+                        <Rectangle Height="6" Fill="{TemplateBinding Background}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Slider">
+        <Setter Property="Height" Value="28" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsMoveToPointEnabled" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+                    <Grid Background="Transparent">
+                        <Track x:Name="PART_Track">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderTrackFill}" Background="{StaticResource Red}" />
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderTrackFill}" Background="{StaticResource Off}" />
+                            </Track.IncreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb>
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <c:Shard x:Name="Grip" Width="14" Height="24" Points="0.35,0 1,0 0.65,1 0,1" Fill="{StaticResource Ink}" />
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Grip" Property="Fill" Value="{StaticResource Red}" />
+                                                    <Setter TargetName="Grip" Property="Stroke" Value="{StaticResource Ink}" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                        <Rectangle x:Name="FocusRing" Stroke="{StaticResource Ink}" StrokeThickness="1" StrokeDashArray="2 2" Margin="-4,0" Visibility="Collapsed" IsHitTestVisible="False" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="FocusRing" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Thin scrollbar that turns red when grabbed. -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="Width" Value="8" />
+        <Setter Property="MinWidth" Value="8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid Background="Transparent">
+                        <Track x:Name="PART_Track" IsDirectionReversed="True">
+                            <Track.Thumb>
+                                <Thumb>
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Rectangle x:Name="Bar" Fill="{StaticResource Off}" Margin="2,0" />
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bar" Property="Fill" Value="{StaticResource Mute}" />
+                                                </Trigger>
+                                                <Trigger Property="IsDragging" Value="True">
+                                                    <Setter TargetName="Bar" Property="Fill" Value="{StaticResource Red}" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="Height" Value="0" />
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="ToolTip">
+        <Setter Property="Background" Value="{StaticResource Ground}" />
+        <Setter Property="Foreground" Value="{StaticResource Ink}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Red}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="FontFamily" Value="{StaticResource Body}" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="10,6" />
+    </Style>
+
+    <!-- Boss chips: major = red, regular = white, alarm off = dashed outline. -->
+    <Style x:Key="ChipText" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Body}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MelissiaBossTimer.Core/MelissiaBossTimer.Core.csproj" />
+    <Project Path="src/MelissiaBossTimer/MelissiaBossTimer.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MelissiaBossTimer.Tests/MelissiaBossTimer.Tests.csproj" />
+  </Folder>
+</Solution>

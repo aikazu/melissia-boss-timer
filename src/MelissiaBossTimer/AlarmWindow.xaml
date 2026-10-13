@@ -1,0 +1,77 @@
+<Window x:Class="MelissiaBossTimer.AlarmWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:MelissiaBossTimer.Controls"
+        Title="Boss alarm"
+        Icon="pack://application:,,,/app.ico"
+        Width="780" Height="360"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" Topmost="True" ShowInTaskbar="True" ShowActivated="True"
+        WindowStartupLocation="Manual"
+        FontFamily="{StaticResource Body}"
+        UseLayoutRounding="True">
+
+    <!-- Calling card: a red shard and white cut behind a tilted black card. -->
+    <Grid x:Name="Card" Margin="18" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <SkewTransform x:Name="CardSkew" />
+                <TranslateTransform x:Name="CardSlide" />
+            </TransformGroup>
+        </Grid.RenderTransform>
+
+        <c:Shard Points="0.02,0.1 1,0 0.96,1 0,0.92" Fill="{StaticResource Red}" Margin="14,-8,-8,10" />
+        <c:Shard Points="0,0.04 0.98,0 1,0.95 0.03,1" Fill="{StaticResource Ink}" Margin="-4,4,6,-6" />
+        <c:Shard Points="0,0.04 0.98,0 1,0.95 0.03,1" Fill="{StaticResource Ground}" Margin="4,10,14,4" />
+        <c:Shard Points="0,0.04 0.98,0 1,0.95 0.03,1" Fill="{StaticResource HalftoneWhite}" Opacity="0.12" Margin="4,10,14,4" IsHitTestVisible="False">
+            <c:Shard.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Transparent" Offset="0.4" />
+                    <GradientStop Color="Black" Offset="1" />
+                </LinearGradientBrush>
+            </c:Shard.OpacityMask>
+        </c:Shard>
+
+        <Grid Margin="40,34,48,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- The lead boss's face on a red cut, leaning into the card -->
+            <ContentControl Grid.Column="1" Grid.RowSpan="2" x:Name="Face" Focusable="False" IsTabStop="False" Margin="18,-6,0,10" VerticalAlignment="Top">
+                <ContentControl.RenderTransform>
+                    <RotateTransform Angle="4" CenterX="90" CenterY="90" />
+                </ContentControl.RenderTransform>
+            </ContentControl>
+
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <c:Shard Points="0.04,0 1,0 0.96,1 0,1" Fill="{StaticResource Red}" />
+                    <TextBlock x:Name="Headline" Text="BOSS ALARM" FontFamily="{StaticResource Display}" FontSize="20" Foreground="{StaticResource Ink}" Margin="12,1,16,3" />
+                </Grid>
+                <TextBlock x:Name="SoundText" Margin="14,0,0,0" VerticalAlignment="Center" FontFamily="{StaticResource Numerals}" FontWeight="Bold" FontSize="15" Foreground="{StaticResource Mute}" />
+            </StackPanel>
+
+            <Viewbox Grid.Row="1" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left" Margin="0,10,0,6">
+                <c:RansomText x:Name="Bosses" LetterSize="58" />
+            </Viewbox>
+
+            <DockPanel Grid.Row="2" Grid.ColumnSpan="2" LastChildFill="False">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Bottom">
+                    <TextBlock x:Name="SpawnTime" Style="{StaticResource Time}" FontSize="52" Text="05:00" />
+                    <StackPanel Margin="14,0,0,6" VerticalAlignment="Bottom">
+                        <TextBlock Text="LOCAL TIME" FontFamily="{StaticResource Numerals}" FontWeight="Bold" FontSize="14" Foreground="{StaticResource Mute}" />
+                        <TextBlock x:Name="LeftText" FontFamily="{StaticResource Numerals}" FontWeight="ExtraBold" FontSize="24" Foreground="{StaticResource Red}" Typography.NumeralAlignment="Tabular" />
+                    </StackPanel>
+                </StackPanel>
+                <Button DockPanel.Dock="Right" x:Name="DismissButton" Style="{StaticResource PrimaryButton}" Content="DISMISS" FontSize="20" Padding="30,10" VerticalAlignment="Bottom" IsDefault="True" IsCancel="True" Click="OnDismiss" />
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>

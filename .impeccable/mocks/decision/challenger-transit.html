@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Midnight Line Diagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0D1B3E;--bar:#0A1632;--s:#142857;--p:#F4F1EA;--dim:#B3B9CB;--mute:#8590AE;--ln:rgba(244,241,234,.14);--sc:#E4312B;--cb:#2B6CB0;--am:#F2A900;--gr:#2E9E5B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1100px;height:720px;overflow:hidden;background:var(--g);color:var(--p);font:400 14px/1.3 "Hanken Grotesk","Segoe UI",sans-serif;font-variant-numeric:tabular-nums;display:flex;flex-direction:column}
+.tabs{height:52px;flex:none;background:var(--bar);border-bottom:1px solid var(--ln);display:flex;align-items:stretch;padding:0 24px}
+.brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;margin-right:36px}
+.tabs a{display:flex;align-items:center;padding:0 18px;font-size:15px;font-weight:500;color:var(--dim);border-bottom:3px solid transparent}
+.tabs a.on{color:var(--p);font-weight:700;border-bottom-color:var(--cb)}
+.clk{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--dim)}.clk b{font-size:22px;font-weight:600;color:var(--p)}
+svg{display:block;flex:none}svg text{font:500 11px "Hanken Grotesk","Segoe UI",sans-serif;fill:var(--p)}
+.ln{fill:none;stroke-width:8;stroke-linejoin:round}.ld{stroke:var(--am);stroke-width:1.5;fill:none}
+.lb{fill:var(--dim)!important;font-size:10.5px!important}
+.low{flex:1;min-height:0;border-top:1px solid var(--ln);padding:14px 24px;display:grid;grid-template-columns:372px 1fr;column-gap:24px}
+.nxt{background:var(--s);border:1px solid var(--ln);border-radius:12px;padding:16px 22px;display:flex;flex-direction:column}
+.cap{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--dim)}
+.pill{display:inline-block;padding:3px 9px;border-radius:10px;font-size:11px;font-weight:800;letter-spacing:.06em;background:var(--c);color:var(--pt)}
+.mj{--c:var(--sc);--pt:#fff}.lp{--c:var(--am);--pt:var(--g)}
+.cd{font-size:96px;font-weight:700;line-height:1;letter-spacing:-.03em;margin:8px 0 6px -3px}.cd u{text-decoration:none;font-size:46px;font-weight:600;color:var(--dim);margin:0 6px 0 3px}
+.nm{display:flex;align-items:center;gap:12px;font-size:28px;font-weight:700;line-height:1.2}.nm:before,li:before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--c)}
+.meta{font-size:14px;color:var(--dim);margin:8px 0 0 24px}.meta b{color:var(--p)}
+.ctl{margin-top:auto;padding-top:10px;display:grid;gap:10px;font-size:13px;color:var(--dim)}.r{display:flex;align-items:center;gap:10px}.r>span:first-child{width:52px}
+.sw{width:36px;height:20px;border-radius:10px;background:var(--gr);position:relative}.sw:after{content:"";position:absolute;right:3px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--p)}
+.sel{flex:1;padding:7px 10px;border:1px solid var(--ln);border-radius:6px;color:var(--p);font-weight:600;background:var(--g)}
+.sl{flex:1;height:5px;border-radius:3px;background:rgba(244,241,234,.18);position:relative}.sl b{position:absolute;inset:0 auto 0 0;width:80%;border-radius:3px;background:var(--cb)}
+.sl:after{content:"";position:absolute;left:80%;top:-5px;margin-left:-7px;width:15px;height:15px;border-radius:50%;background:var(--p)}
+button{font:700 13px "Hanken Grotesk","Segoe UI",sans-serif;padding:8px 14px;border-radius:6px;border:0;background:var(--cb);color:#fff}
+.lists{display:grid;grid-template-columns:1fr 1fr;column-gap:28px;padding-top:2px}
+h4{display:flex;align-items:center;gap:10px;height:28px;font-size:15px;font-weight:700}h4 span{margin-left:auto;font-size:12px;font-weight:400;color:var(--mute)}
+ul{list-style:none}
+li{display:flex;align-items:center;gap:8px;height:19.5px;border-bottom:1px solid rgba(244,241,234,.07);font-size:13.5px;color:var(--dim)}
+li time{width:42px;flex:none;font-weight:700;color:var(--p)}li span{flex:1;font-weight:500;color:var(--p)}
+li.o,li.o time,li.o span{color:var(--mute);font-weight:400}li em{font:700 10.5px/1 "Hanken Grotesk",sans-serif;font-style:normal;padding:2px 7px;border-radius:8px;margin-left:8px;border:1px solid var(--ln);color:var(--mute)}
+li.n{color:var(--p)}li.n:before{width:14px;height:14px;margin:0 -1px;box-shadow:0 0 0 3px rgba(228,49,43,.35)}li.n em{background:var(--sc);border-color:var(--sc);color:#fff}
+footer{height:32px;flex:none;border-top:1px solid var(--ln);background:var(--bar);padding:0 24px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}footer i{width:8px;height:8px;border-radius:50%;background:var(--gr)}
+</style></head><body>
+<div class="tabs"><div class="brand"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M2 7H20" stroke="#E4312B" stroke-width="4" stroke-linecap="round"/><path d="M2 15H20" stroke="#F2A900" stroke-width="4" stroke-linecap="round"/></svg>Melissia Boss Timer</div><a class="on">Schedule</a><a>Bosses</a><a>Sounds</a><a>Settings</a><div class="clk">Wed 14 Oct · UTC+07:00<b>04:52:12</b></div></div>
+<svg width="1100" height="260" viewBox="0 0 1100 260" aria-label="24 hour line diagram">
+<g class="ln"><path d="M24 120H988" stroke="#E4312B"/><path d="M72 120L108 156H952L988 120" stroke="#F2A900"/></g>
+<g fill="#F4F1EA"><rect x="21" y="107" width="6" height="26" rx="2"/><rect x="985" y="107" width="6" height="26" rx="2"/></g>
+<path d="M119.3 80V244" stroke="#2B6CB0" stroke-width="3"/>
+<g class="ld"><path d="M124 163V216M133 163V202M142 163V188M151 163V174M268 163V216M277 163V202M286 163V188M295 163V174M412 163V216M421 163V202M430 163V188M439 163V174M556 163V174M700 163V174M844 163V188M862 163V174"/></g>
+<path d="M133 150v12M142 150v12M151 150v12M268 150v12M277 150v12M286 150v12M295 150v12M421 150v12M439 150v12M844 150v12" stroke="#F4F1EA" stroke-width="3"/>
+<g fill="#0D1B3E" stroke="#F4F1EA" stroke-width="3"><circle cx="448" cy="120" r="5"/><circle cx="520" cy="120" r="5"/><circle cx="592" cy="120" r="5"/><circle cx="646" cy="120" r="5"/><circle cx="664" cy="120" r="5"/><circle cx="736" cy="120" r="5"/><circle cx="772" cy="120" r="5"/><circle cx="934" cy="120" r="5"/>
+<rect x="406" y="111" width="12" height="54" rx="6"/><rect x="424" y="111" width="12" height="54" rx="6"/><rect x="550" y="111" width="12" height="54" rx="6"/><rect x="694" y="111" width="12" height="54" rx="6"/><rect x="856" y="111" width="12" height="54" rx="6"/></g>
+<rect x="112" y="105" width="24" height="66" rx="12" fill="rgba(228,49,43,.3)"/><rect x="117" y="110" width="14" height="56" rx="7" fill="#F4F1EA"/><circle cx="124" cy="120" r="3.5" fill="#E4312B"/><circle cx="124" cy="156" r="3.5" fill="#F2A900"/>
+<rect x="24" y="58" width="104" height="22" rx="11" fill="#2B6CB0"/><path d="M113 80h13l-6.5 7z" fill="#2B6CB0"/><text x="76" y="73" text-anchor="middle" style="font-weight:800;font-size:11px;letter-spacing:.06em">YOU ARE HERE</text>
+<g class="lb"><text transform="translate(130 98) rotate(-45)" style="font-size:16px;font-weight:800;fill:#F4F1EA">05:00 Kzarka</text>
+<text transform="translate(416 104) rotate(-45)">Targargo</text><text transform="translate(434 104) rotate(-45)">Katzvariak</text><text transform="translate(452 108) rotate(-45)">Giant Mudster · Red Nose</text>
+<text transform="translate(524 108) rotate(-45)">Stormbringer Karanda</text><text transform="translate(560 104) rotate(-45)">Vell</text><text transform="translate(596 108) rotate(-45)">Kzarka</text>
+<text transform="translate(650 108) rotate(-45)">Quint · Muraka</text><text transform="translate(668 108) rotate(-45)">Ancient Kutum</text><text transform="translate(704 104) rotate(-45)">Targargo</text>
+<text transform="translate(740 108) rotate(-45)">Karanda</text><text transform="translate(776 108) rotate(-45)">Garmoth</text><text transform="translate(866 104) rotate(-45)">Giant Mudster · Red Nose</text><text transform="translate(938 108) rotate(-45)">Thundercloud Ancient Kutum</text></g>
+<g><text x="129" y="220" style="font-weight:800">Bulgasal</text><text x="138" y="206" class="lb" style="fill:#8590AE!important">Uturi</text><text x="147" y="192">Golden Pig King</text><text x="156" y="178" style="fill:#8590AE">Sangoon</text>
+<text x="273" y="220">Bulgasal</text><text x="282" y="206" style="fill:#8590AE">Uturi</text><text x="291" y="192">Golden Pig King</text><text x="300" y="178" style="fill:#8590AE">Sangoon</text>
+<text x="417" y="220">Bulgasal</text><text x="426" y="206" style="fill:#8590AE">Uturi</text><text x="435" y="192">Golden Pig King</text><text x="444" y="178" style="fill:#8590AE">Sangoon</text>
+<text x="561" y="178">Bulgasal</text><text x="705" y="178">Bulgasal</text><text x="849" y="192">Bulgasal</text><text x="867" y="178">Golden Pig King</text></g>
+<path d="M124 232H988" stroke="rgba(244,241,234,.25)"/>
+<line x1="123.25" x2="988" y1="236" y2="236" stroke="#F4F1EA" stroke-opacity=".5" stroke-width="8" stroke-dasharray="1.5 34.5"/><line x1="123.25" x2="988" y1="239" y2="239" stroke="#F4F1EA" stroke-width="14" stroke-dasharray="1.5 106.5"/>
+<g text-anchor="middle" style="fill:#B3B9CB"><text x="124" y="257" class="lb">05:00</text><text x="232" y="257" class="lb">08:00</text><text x="340" y="257" class="lb">11:00</text><text x="448" y="257" class="lb">14:00</text><text x="556" y="257" class="lb">17:00</text><text x="664" y="257" class="lb">20:00</text><text x="772" y="257" class="lb">23:00</text><text x="880" y="257" class="lb">02:00</text><text x="988" y="257" class="lb">04:59</text></g>
+</svg>
+<div class="low">
+<section class="nxt">
+<div class="cap"><span>NEXT STATION · 05:00</span><span><b class="pill mj">MAJOR</b> <b class="pill lp">EVERY 4 H</b></span></div>
+<div class="cd">7<u>m</u>48<u>s</u></div>
+<div class="nm mj">Kzarka</div><div class="nm lp">Bulgasal</div>
+<p class="meta">Alarm fires <b>04:55</b>, 5 min before</p>
+<div class="ctl">
+<div class="r"><i class="sw"></i><span style="width:auto;color:var(--p);font-weight:600">Alarm on</span></div>
+<div class="r"><span>Sound</span><div class="sel">War Horn</div><button>Test sound</button></div>
+<div class="r"><span>Volume</span><div class="sl"><b></b></div><span style="width:auto">80%</span></div>
+</div></section>
+<section class="lists">
+<div class="mj"><h4><b class="pill">MAJOR</b>Major bosses<span>14 spawns</span></h4><ul>
+<li class="n"><time>05:00</time><span>Kzarka<em>NEXT</em></span></li><li><time>13:00</time><span>Targargo</span></li><li><time>13:30</time><span>Katzvariak</span></li>
+<li><time>14:00</time><span>Giant Mudster, Red Nose</span></li><li><time>16:00</time><span>Stormbringer Karanda</span></li><li><time>17:00</time><span>Vell</span></li>
+<li><time>18:00</time><span>Kzarka</span></li><li><time>19:30</time><span>Quint, Muraka</span></li><li><time>20:00</time><span>Ancient Kutum</span></li>
+<li><time>21:00</time><span>Targargo</span></li><li><time>22:00</time><span>Karanda</span></li><li><time>23:00</time><span>Garmoth</span></li>
+<li><time>01:30</time><span>Giant Mudster, Red Nose</span></li><li><time>03:30</time><span>Thundercloud Ancient Kutum</span></li></ul></div>
+<div class="lp"><h4><b class="pill">EVERY 4 H</b>Regular loop<span>16 spawns</span></h4><ul>
+<li class="n"><time>05:00</time><span>Bulgasal<em>NEXT</em></span></li><li class="o"><time>05:15</time><span>Uturi<em>alarm off</em></span></li><li><time>05:30</time><span>Golden Pig King</span></li><li class="o"><time>05:45</time><span>Sangoon<em>alarm off</em></span></li>
+<li><time>09:00</time><span>Bulgasal</span></li><li class="o"><time>09:15</time><span>Uturi<em>alarm off</em></span></li><li><time>09:30</time><span>Golden Pig King</span></li><li class="o"><time>09:45</time><span>Sangoon<em>alarm off</em></span></li>
+<li><time>13:00</time><span>Bulgasal</span></li><li class="o"><time>13:15</time><span>Uturi<em>alarm off</em></span></li><li><time>13:30</time><span>Golden Pig King</span></li><li class="o"><time>13:45</time><span>Sangoon<em>alarm off</em></span></li>
+<li><time>17:00</time><span>Bulgasal</span></li><li><time>21:00</time><span>Bulgasal</span></li><li><time>01:00</time><span>Bulgasal</span></li><li><time>01:30</time><span>Golden Pig King</span></li></ul></div>
+</section></div>
+<footer><i></i>PC time zone UTC+07:00 (Bangkok, Hanoi, Jakarta) · schedule from wiki, checked 04:31 · times on wiki are GMT</footer>
+</body></html>

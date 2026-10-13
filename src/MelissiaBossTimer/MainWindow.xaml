@@ -1,0 +1,135 @@
+<Window x:Class="MelissiaBossTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:MelissiaBossTimer.Controls"
+        Title="Melissia Boss Timer"
+        Icon="pack://application:,,,/app.ico"
+        Width="1100" Height="720" MinWidth="980" MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Ground}"
+        Foreground="{StaticResource Ink}"
+        FontFamily="{StaticResource Body}"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="176" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="172" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <!-- Left rail -->
+        <Grid Grid.RowSpan="2" Background="{StaticResource Rail}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="18,20,12,26">
+                <TextBlock Text="MELISSIA" FontFamily="{StaticResource Display}" FontSize="28" Foreground="{StaticResource Ink}">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="-4" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Grid HorizontalAlignment="Left" Margin="6,2,0,0">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="-4" />
+                    </Grid.RenderTransform>
+                    <c:Shard Points="0.05,0 1,0.08 0.95,1 0,0.9" Fill="{StaticResource Red}" />
+                    <TextBlock Text="BOSS TIMER" FontFamily="{StaticResource Display}" FontSize="17" Margin="10,1,12,2" Foreground="{StaticResource Ink}" />
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" x:Name="Nav" KeyboardNavigation.TabNavigation="Once">
+                <RadioButton Style="{StaticResource NavItem}" GroupName="nav" Content="SCHEDULE" Tag="schedule" IsChecked="True" Checked="OnNavChecked" />
+                <RadioButton Style="{StaticResource NavItem}" GroupName="nav" Content="BOSSES" Tag="bosses" Checked="OnNavChecked" />
+                <RadioButton Style="{StaticResource NavItem}" GroupName="nav" Content="SOUNDS" Tag="sounds" Checked="OnNavChecked" />
+                <RadioButton Style="{StaticResource NavItem}" GroupName="nav" Content="SETTINGS" Tag="settings" Checked="OnNavChecked" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Margin="18,0,12,18">
+                <TextBlock x:Name="ClockText" Style="{StaticResource Time}" FontSize="34" Text="00:00:00" />
+                <TextBlock x:Name="ClockMeta" Style="{StaticResource BodyText}" FontSize="12" Text="" Margin="0,2,0,0" />
+            </StackPanel>
+        </Grid>
+
+        <!-- On-air banner: the next spawn, always visible -->
+        <Grid Grid.Column="1" x:Name="Banner" ClipToBounds="True" Background="{StaticResource Ground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="BannerSlide" />
+            </Grid.RenderTransform>
+
+            <!-- White cut behind the red field, then the red field with halftone toward its slanted edge -->
+            <c:Shard Grid.ColumnSpan="3" Points="0,0 0.86,0 0.80,1 0,1" Fill="{StaticResource Ink}" Margin="0,0,0,0" />
+            <c:Shard Grid.ColumnSpan="3" x:Name="RedField" Points="0,0 0.84,0 0.78,1 0,1" Fill="{StaticResource Red}" />
+            <c:Shard Grid.ColumnSpan="3" Points="0,0 0.84,0 0.78,1 0,1" Fill="{StaticResource HalftoneWhite}" Opacity="0.22" IsHitTestVisible="False">
+                <c:Shard.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="Transparent" Offset="0.35" />
+                        <GradientStop Color="Black" Offset="0.85" />
+                    </LinearGradientBrush>
+                </c:Shard.OpacityMask>
+            </c:Shard>
+
+            <Grid Grid.ColumnSpan="2" Margin="26,16,40,14">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Grid x:Name="StatusTag" VerticalAlignment="Center">
+                        <c:Shard x:Name="StatusPlate" Points="0.03,0 1,0 0.97,1 0,1" Fill="{StaticResource Ground}" />
+                        <TextBlock x:Name="StatusText" Text="ALARM" FontFamily="{StaticResource Numerals}" FontWeight="ExtraBold" FontSize="15" Foreground="{StaticResource Ink}" Margin="12,3,14,3" />
+                    </Grid>
+                    <TextBlock x:Name="DateMeta" Margin="12,0,0,0" VerticalAlignment="Center" FontFamily="{StaticResource Numerals}" FontWeight="Bold" FontSize="15" Foreground="{StaticResource Ink}" />
+                </StackPanel>
+                <Viewbox Grid.Row="1" x:Name="NamesBox" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left" Margin="0,4,0,2">
+                    <c:RansomText x:Name="BossNames" LetterSize="54" />
+                </Viewbox>
+                <StackPanel Grid.Row="2" x:Name="TimeRow" Orientation="Horizontal">
+                    <TextBlock x:Name="SpawnTime" Style="{StaticResource Time}" FontSize="36" Text="--:--" />
+                    <TextBlock x:Name="ThenText" VerticalAlignment="Bottom" Margin="14,0,0,5" FontFamily="{StaticResource Body}" FontWeight="SemiBold" FontSize="14" Foreground="{StaticResource Ink}" />
+                </StackPanel>
+            </Grid>
+
+            <!-- The lead boss's face straight on the red field, standing on the banner's bottom edge, tucked under the countdown frame -->
+            <ContentControl Grid.Column="1" x:Name="BannerFace" Focusable="False" IsTabStop="False" VerticalAlignment="Bottom" Margin="0,0,-40,0" />
+
+            <!-- Countdown in a jagged frame -->
+            <Grid Grid.Column="2" Margin="0,14,22,14">
+                <Grid.RenderTransform>
+                    <RotateTransform Angle="-3" CenterX="140" CenterY="70" />
+                </Grid.RenderTransform>
+                <c:Shard x:Name="CountFrame" Points="0.04,0.06 1,0 0.97,0.92 0,1" Fill="{StaticResource Ground}" Stroke="{StaticResource Ink}" StrokeThickness="3" />
+                <StackPanel VerticalAlignment="Center" Margin="22,0,12,4">
+                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Left">
+                        <TextBlock x:Name="CountdownText" Style="{StaticResource Time}" FontSize="96" Text="--:--" />
+                    </Viewbox>
+                    <TextBlock x:Name="CountdownCaption" Text="UNTIL SPAWN" FontFamily="{StaticResource Numerals}" FontWeight="Bold" FontSize="15" Foreground="{StaticResource Mute}" Margin="4,0,0,0" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!-- Pages -->
+        <ContentControl Grid.Column="1" Grid.Row="1" x:Name="PageHost" Focusable="False" />
+
+        <!-- Status line -->
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" Background="{StaticResource Rail}" LastChildFill="True">
+            <Button DockPanel.Dock="Right" x:Name="RefreshLink" Style="{StaticResource LinkButton}" Content="Refresh schedule" Margin="0,0,18,0" VerticalAlignment="Center" Click="OnRefreshClick" />
+            <TextBlock x:Name="StatusLine" Margin="18,0,12,0" VerticalAlignment="Center" FontFamily="{StaticResource Body}" FontWeight="Medium" FontSize="12.5" Foreground="{StaticResource Mute}" TextTrimming="CharacterEllipsis" />
+        </DockPanel>
+    </Grid>
+</Window>

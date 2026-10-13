@@ -1,0 +1,15 @@
+# Build output
+bin/
+obj/
+publish/
+*.user
+.vs/
+
+# Raw generated boss art (1254 px masters, ~40 MB); the shipped 512 px assets live in src/MelissiaBossTimer/Assets/Bosses
+art/raw/
+__pycache__/
+
+# Impeccable session scratch (decision Q&A logs, detector cache, review captures)
+.impeccable/questions/
+.impeccable/review/
+.impeccable/hook.cache.json

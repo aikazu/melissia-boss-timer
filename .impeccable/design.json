@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T19:51:05+00:00",
+  "title": "Design System: Melissia Boss Timer",
+  "extensions": {
+    "platform": "windows (native WPF, net10.0-windows); tokens live in src/MelissiaBossTimer/Theme.xaml; the CSS here is a preview translation, not the source.",
+    "colorMeta": {
+      "phantom-red": {
+        "role": "primary",
+        "displayName": "Phantom Red",
+        "canonical": "#E5191C",
+        "themeKey": "Red",
+        "tonalRamp": [
+          "oklch(15% 0.06 27.9)",
+          "oklch(26% 0.11 27.9)",
+          "oklch(37% 0.15 27.9)",
+          "oklch(48% 0.19 27.9)",
+          "oklch(58.6% 0.23 27.9)",
+          "oklch(70% 0.16 27.9)",
+          "oklch(82% 0.09 27.9)",
+          "oklch(95% 0.025 27.9)"
+        ]
+      },
+      "night-ground": {
+        "role": "neutral",
+        "displayName": "Night Ground",
+        "canonical": "#0B0B0D",
+        "themeKey": "Ground",
+        "tonalRamp": [
+          "oklch(15% 0.004 285.9)",
+          "oklch(26% 0.004 285.9)",
+          "oklch(37% 0.004 285.9)",
+          "oklch(48% 0.004 285.9)",
+          "oklch(59% 0.004 285.9)",
+          "oklch(70% 0.004 285.9)",
+          "oklch(82% 0.004 285.9)",
+          "oklch(95% 0.004 285.9)"
+        ]
+      },
+      "rail-black": {
+        "role": "neutral",
+        "displayName": "Rail Black",
+        "canonical": "#050506",
+        "themeKey": "Rail",
+        "tonalRamp": [
+          "oklch(15% 0.003 285.9)",
+          "oklch(26% 0.003 285.9)",
+          "oklch(37% 0.003 285.9)",
+          "oklch(48% 0.003 285.9)",
+          "oklch(59% 0.003 285.9)",
+          "oklch(70% 0.003 285.9)",
+          "oklch(82% 0.003 285.9)",
+          "oklch(95% 0.003 285.9)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#18181B",
+        "themeKey": "Surface",
+        "tonalRamp": [
+          "oklch(15% 0.006 285.9)",
+          "oklch(26% 0.006 285.9)",
+          "oklch(37% 0.006 285.9)",
+          "oklch(48% 0.006 285.9)",
+          "oklch(59% 0.006 285.9)",
+          "oklch(70% 0.006 285.9)",
+          "oklch(82% 0.006 285.9)",
+          "oklch(95% 0.006 285.9)"
+        ]
+      },
+      "surface-raised": {
+        "role": "neutral",
+        "displayName": "Surface Raised",
+        "canonical": "#222226",
+        "themeKey": "Surface2",
+        "tonalRamp": [
+          "oklch(15% 0.007 285.9)",
+          "oklch(26% 0.007 285.9)",
+          "oklch(37% 0.007 285.9)",
+          "oklch(48% 0.007 285.9)",
+          "oklch(59% 0.007 285.9)",
+          "oklch(70% 0.007 285.9)",
+          "oklch(82% 0.007 285.9)",
+          "oklch(95% 0.007 285.9)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#34343A",
+        "themeKey": "Line",
+        "tonalRamp": [
+          "oklch(15% 0.011 285.8)",
+          "oklch(26% 0.011 285.8)",
+          "oklch(37% 0.011 285.8)",
+          "oklch(48% 0.011 285.8)",
+          "oklch(59% 0.011 285.8)",
+          "oklch(70% 0.011 285.8)",
+          "oklch(82% 0.011 285.8)",
+          "oklch(95% 0.011 285.8)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink White",
+        "canonical": "#FFFFFF",
+        "themeKey": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(37% 0 0)",
+          "oklch(48% 0 0)",
+          "oklch(59% 0 0)",
+          "oklch(70% 0 0)",
+          "oklch(82% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "mute": {
+        "role": "neutral",
+        "displayName": "Mute",
+        "canonical": "#B4B4BC",
+        "themeKey": "Mute",
+        "tonalRamp": [
+          "oklch(15% 0.011 286.1)",
+          "oklch(26% 0.011 286.1)",
+          "oklch(37% 0.011 286.1)",
+          "oklch(48% 0.011 286.1)",
+          "oklch(59% 0.011 286.1)",
+          "oklch(70% 0.011 286.1)",
+          "oklch(82% 0.011 286.1)",
+          "oklch(95% 0.011 286.1)"
+        ]
+      },
+      "dim": {
+        "role": "neutral",
+        "displayName": "Dim",
+        "canonical": "#8A8A94",
+        "themeKey": "Dim",
+        "tonalRamp": [
+          "oklch(15% 0.015 286.0)",
+          "oklch(26% 0.015 286.0)",
+          "oklch(37% 0.015 286.0)",
+          "oklch(48% 0.015 286.0)",
+          "oklch(59% 0.015 286.0)",
+          "oklch(70% 0.015 286.0)",
+          "oklch(82% 0.015 286.0)",
+          "oklch(95% 0.015 286.0)"
+        ]
+      },
+      "off": {
+        "role": "neutral",
+        "displayName": "Off",
+        "canonical": "#3A3A40",
+        "themeKey": "Off",
+        "tonalRamp": [
+          "oklch(15% 0.01 285.9)",
+          "oklch(26% 0.01 285.9)",
+          "oklch(37% 0.01 285.9)",
+          "oklch(48% 0.01 285.9)",
+          "oklch(59% 0.01 285.9)",
+          "oklch(70% 0.01 285.9)",
+          "oklch(82% 0.01 285.9)",
+          "oklch(95% 0.01 285.9)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page titles (Anton 34px, skewed -6deg); brand word 28px and rail menu words 25px tilted -4deg."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Panel titles (SectionTitle), e.g. ALARM."
+      },
+      "title": {
+        "displayName": "Tab Title",
+        "purpose": "Heading-tab text, uppercase; Anton 13-14px for NEXT and DEFAULT badges."
+      },
+      "countdown": {
+        "displayName": "Countdown",
+        "purpose": "Banner countdown, 96px (74px for h:mm:ss), DownOnly-scaled inside its frame."
+      },
+      "time": {
+        "displayName": "Time",
+        "purpose": "Every clock value: 52 alarm card, 40 next alarm, 36 spawn time, 34 rail clock, 21 fixture rows, 20 counts."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Button labels in Ink: 16px primary, 15px ghost, 20px on the alarm DISMISS."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Rail menu words, rotated -4deg."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels in Mute above controls, banner meta and status text."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explanatory copy in Mute; 13px for notes."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "ComboBox, switch labels; link buttons at 13px underlined."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Boss chips."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Rail clock meta, footer status line, 'tmrw' suffix. The floor; never below 11px."
+      }
+    },
+    "shadows": [],
+    "depth": "No shadows. Depth is layered flat planes: an offset white cut (about 4px down-right) behind a red or black plate behind type. Halftone (white dots, 6px tile, 1.1px radius, 12-22% opacity, gradient-masked toward the slanted edge) is the only texture.",
+    "motion": [
+      {
+        "name": "snap-nav",
+        "value": "140ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Active rail shard slides in 40px. Source: WPF ExponentialEase EaseOut exponent 6; the bezier is a CSS approximation."
+      },
+      {
+        "name": "snap-switch",
+        "value": "120ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Switch knob travels 18px. Source: ExponentialEase EaseOut exponent 5."
+      },
+      {
+        "name": "snap-ransom",
+        "value": "160ms cubic-bezier(0.16, 1, 0.3, 1); stagger 16ms per letter",
+        "purpose": "Ransom letters scale 1.6 to 1 with a 60ms opacity reveal. Source: ExponentialEase EaseOut exponent 6. Skipped when client-area animation is off."
+      },
+      {
+        "name": "snap-banner",
+        "value": "180ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Banner slides 90px along its slant when the next spawn changes. Source: ExponentialEase EaseOut exponent 7. Skipped when client-area animation is off."
+      },
+      {
+        "name": "snap-calling-card",
+        "value": "200ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Alarm card slides 140px and unskews from -14deg. Source: ExponentialEase EaseOut exponent 7. Skipped when client-area animation is off."
+      }
+    ],
+    "breakpoints": [],
+    "window": {
+      "default": "1100x720",
+      "minimum": "980x640",
+      "rail": "176px",
+      "banner": "172px",
+      "footer": "30px",
+      "alarmPanel": "286px",
+      "fixtureGutter": "14px",
+      "alarmWindow": "780x360"
+    },
+    "shapes": {
+      "radius": "0 everywhere",
+      "primitive": "Shard: polygon in 0..1 coordinates, measures to 0x0 so content sets size",
+      "lean": {
+        "button": "6%",
+        "iconButton": "12%",
+        "switchTrack": "12%",
+        "comboBox": "3%",
+        "headingTab": "4%",
+        "sliderThumb": "35%"
+      },
+      "focus": "2px dashed Ink, dash 2 2, 3-4px outside the shape",
+      "off": "1-1.5px dashed, dash 3 2"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action: red parallelogram plate on a 4px white offset cut; hover inverts to a white plate on a red cut; optional leading Fluent icon.",
+      "html": "<button class=\"ds-btn-primary\"><span class=\"ds-btn-primary__label\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M8 2v12M2 8h12\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>ADD SOUND</span></button>",
+      "css": ".ds-btn-primary{position:relative;isolation:isolate;min-height:36px;padding:8px 20px;border:0;background:transparent;color:#FFFFFF;font:800 16px/1.2 'Barlow Condensed',sans-serif;cursor:pointer}.ds-btn-primary::before,.ds-btn-primary::after{content:'';position:absolute;inset:0;clip-path:polygon(6% 0,100% 0,94% 100%,0 100%);z-index:-1}.ds-btn-primary::before{background:#FFFFFF;transform:translate(4px,4px)}.ds-btn-primary::after{background:#E5191C}.ds-btn-primary__label{display:inline-flex;align-items:center;gap:8px}.ds-btn-primary:hover{color:#0B0B0D}.ds-btn-primary:hover::after{background:#FFFFFF}.ds-btn-primary:hover::before{background:#E5191C}.ds-btn-primary:active{transform:translate(2px,2px)}.ds-btn-primary:focus-visible{outline:2px dashed #FFFFFF;outline-offset:4px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action: transparent parallelogram with a 2px white outline and no cut; hover fills white.",
+      "html": "<button class=\"ds-btn-ghost\"><span class=\"ds-btn-ghost__label\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M8 1.5a4 4 0 0 0-4 4V9L2.5 11.5h11L12 9V5.5a4 4 0 0 0-4-4zM6.3 13a1.8 1.8 0 0 0 3.4 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>TEST ALARM</span></button>",
+      "css": ".ds-btn-ghost{position:relative;isolation:isolate;min-height:36px;padding:7px 18px;border:0;background:transparent;color:#FFFFFF;font:800 15px/1.2 'Barlow Condensed',sans-serif;cursor:pointer}.ds-btn-ghost::before,.ds-btn-ghost::after{content:'';position:absolute;clip-path:polygon(6% 0,100% 0,94% 100%,0 100%);z-index:-1}.ds-btn-ghost::before{inset:0;background:#FFFFFF}.ds-btn-ghost::after{inset:2px;background:#0B0B0D}.ds-btn-ghost__label{display:inline-flex;align-items:center;gap:8px}.ds-btn-ghost:hover{color:#0B0B0D}.ds-btn-ghost:hover::after{background:#FFFFFF}.ds-btn-ghost:active{transform:translate(2px,2px)}.ds-btn-ghost:focus-visible{outline:2px dashed #FFFFFF;outline-offset:4px}"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "Row action (preview, delete): 38x34 Surface Raised parallelogram with a Fluent glyph; hover and an active preview turn it red.",
+      "html": "<button class=\"ds-btn-icon\" aria-label=\"Preview sound\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M4 2.5v11l9-5.5z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linejoin=\"miter\"/></svg></button>",
+      "css": ".ds-btn-icon{position:relative;isolation:isolate;width:38px;height:34px;border:0;background:transparent;color:#FFFFFF;display:inline-grid;place-items:center;cursor:pointer}.ds-btn-icon::before{content:'';position:absolute;inset:0;background:#222226;clip-path:polygon(12% 0,100% 0,88% 100%,0 100%);z-index:-1}.ds-btn-icon:hover::before{background:#E5191C}.ds-btn-icon:focus-visible{outline:2px dashed #FFFFFF;outline-offset:3px}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Tilted Anton menu words on the rail; active is white on a jagged red shard over a white cut, sliding in along the rail.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav__item is-active\" href=\"#\">SCHEDULE</a><a class=\"ds-nav__item\" href=\"#\">BOSSES</a><a class=\"ds-nav__item\" href=\"#\">SOUNDS</a></nav>",
+      "css": ".ds-nav{display:flex;flex-direction:column;width:176px;background:#050506;padding:8px 0}.ds-nav__item{position:relative;isolation:isolate;display:flex;align-items:center;height:50px;margin:1px 0;padding:0 0 4px 20px;color:#8A8A94;font:400 25px/1 'Anton',sans-serif;text-decoration:none}.ds-nav__item:hover,.ds-nav__item.is-active{color:#FFFFFF}.ds-nav__item.is-active::before{content:'';position:absolute;inset:6px 4px -2px 6px;background:#FFFFFF;clip-path:polygon(0 15%,100% 0,90% 100%,0 92%);z-index:-2}.ds-nav__item.is-active::after{content:'';position:absolute;inset:0 14px 4px 0;background:#E5191C;clip-path:polygon(0 10%,100% 0,93% 86%,0 100%);z-index:-1;animation:ds-nav-slide 140ms cubic-bezier(0.16,1,0.3,1)}@keyframes ds-nav-slide{from{transform:translateX(-40px)}}.ds-nav__item:focus-visible{outline:2px dashed #FFFFFF;outline-offset:-2px}"
+    },
+    {
+      "name": "Heading Tab",
+      "kind": "custom",
+      "refersTo": "heading-tab",
+      "description": "Header of every block: a flat red shard, Anton uppercase, optional tabular aside. No cut, no outline, no icon, no hover.",
+      "html": "<div class=\"ds-tab\"><span class=\"ds-tab__title\">MORNING</span><span class=\"ds-tab__aside\">09:00–09:45</span></div>",
+      "css": ".ds-tab{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:10px;padding:2px 18px 3px 12px;color:#FFFFFF}.ds-tab::before{content:'';position:absolute;inset:0;background:#E5191C;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);z-index:-1}.ds-tab__title{font:400 20px/1.2 'Anton',sans-serif}.ds-tab__aside{font:700 15px/1.2 'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Boss Chips",
+      "kind": "chip",
+      "refersTo": "chip-major",
+      "description": "Major = red, regular = white with black ink, alarm off = dashed Dim outline with Mute text.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip ds-chip--major\">Kzarka</span><span class=\"ds-chip ds-chip--regular\">Bulgasal</span><span class=\"ds-chip ds-chip--off\">Uturi</span></div>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:4px 6px;padding:8px;background:#18181B}.ds-chip{padding:2px 8px 3px;font:700 13px/1.3 'Barlow',sans-serif}.ds-chip--major{background:#E5191C;color:#FFFFFF}.ds-chip--regular{background:#FFFFFF;color:#0B0B0D}.ds-chip--off{background:transparent;color:#B4B4BC;outline:1px dashed #8A8A94;outline-offset:-1px}"
+    },
+    {
+      "name": "Status Tag",
+      "kind": "custom",
+      "refersTo": "status-tag",
+      "description": "Banner data tag: armed = black plate, white text; firing = white plate, red text; muted = dashed white outline, red text.",
+      "html": "<div class=\"ds-status-row\"><span class=\"ds-status\">ALARM 03:28 · SIREN</span><span class=\"ds-status ds-status--firing\">ALARM NOW</span><span class=\"ds-status ds-status--muted\">ALL ALARMS OFF</span></div>",
+      "css": ".ds-status-row{display:flex;gap:12px;padding:14px;background:#E5191C}.ds-status{position:relative;isolation:isolate;padding:3px 14px 3px 12px;color:#FFFFFF;font:800 15px/1.2 'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums}.ds-status::before{content:'';position:absolute;inset:0;background:#0B0B0D;clip-path:polygon(3% 0,100% 0,97% 100%,0 100%);z-index:-1}.ds-status--firing{color:#E5191C}.ds-status--firing::before{background:#FFFFFF}.ds-status--muted{color:#E5191C;outline:1.5px dashed #FFFFFF;outline-offset:-1px}"
+    },
+    {
+      "name": "Switch",
+      "kind": "input",
+      "refersTo": "switch-on",
+      "description": "Skewed 48x22 track with a square knob; on = red track and white knob, off = Off track and Mute knob; label on the left.",
+      "html": "<label class=\"ds-switch\"><span>All major bosses</span><input type=\"checkbox\" checked><span class=\"ds-switch__track\"></span></label>",
+      "css": ".ds-switch{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:32px;color:#FFFFFF;font:600 14px/1.3 'Barlow',sans-serif;cursor:pointer}.ds-switch input{position:absolute;opacity:0}.ds-switch__track{position:relative;width:48px;height:22px;flex:none;isolation:isolate}.ds-switch__track::before{content:'';position:absolute;inset:0;background:#3A3A40;clip-path:polygon(12% 0,100% 0,88% 100%,0 100%);z-index:-1}.ds-switch__track::after{content:'';position:absolute;left:6px;top:4px;width:18px;height:14px;background:#B4B4BC;transition:transform 120ms cubic-bezier(0.16,1,0.3,1)}.ds-switch input:checked+.ds-switch__track::before{background:#E5191C}.ds-switch input:checked+.ds-switch__track::after{background:#FFFFFF;transform:translateX(18px)}.ds-switch input:focus-visible+.ds-switch__track{outline:2px dashed #FFFFFF;outline-offset:4px}"
+    },
+    {
+      "name": "Select",
+      "kind": "input",
+      "refersTo": "input-select",
+      "description": "ComboBox: Surface Raised parallelogram with a 1px Line edge and solid white caret; hover edge white, focus dashed, open edge red.",
+      "html": "<button class=\"ds-select\" aria-haspopup=\"listbox\">2 minutes before<svg width=\"10\" height=\"6\" viewBox=\"0 0 10 6\" aria-hidden=\"true\"><path d=\"M0 0h10L5 6z\" fill=\"#FFFFFF\"/></svg></button>",
+      "css": ".ds-select{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:space-between;width:260px;min-height:36px;padding:0 16px;border:0;background:transparent;color:#FFFFFF;font:600 14px/1.3 'Barlow',sans-serif;cursor:pointer}.ds-select::before,.ds-select::after{content:'';position:absolute;clip-path:polygon(3% 0,100% 0,97% 100%,0 100%);z-index:-1}.ds-select::before{inset:0;background:#34343A}.ds-select::after{inset:1px;background:#222226}.ds-select:hover::before{background:#FFFFFF}.ds-select[aria-expanded=true]::before{background:#E5191C}.ds-select:focus-visible{outline:2px dashed #FFFFFF;outline-offset:2px}"
+    },
+    {
+      "name": "Countdown Frame",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature: a jagged quad tilted -3deg with a 3px white edge holding the tabular countdown; fills red inside the alarm window.",
+      "html": "<div class=\"ds-count\"><div class=\"ds-count__frame\"><span class=\"ds-count__time\">49:17</span><span class=\"ds-count__cap\">UNTIL SPAWN</span></div></div>",
+      "css": ".ds-count{padding:18px 26px;background:#E5191C}.ds-count__frame{position:relative;isolation:isolate;display:flex;flex-direction:column;width:260px;padding:8px 12px 10px 22px;transform:rotate(-3deg)}.ds-count__frame::before,.ds-count__frame::after{content:'';position:absolute;clip-path:polygon(4% 6%,100% 0,97% 92%,0 100%);z-index:-1}.ds-count__frame::before{inset:0;background:#FFFFFF}.ds-count__frame::after{inset:3px;background:#0B0B0D}.ds-count__time{color:#FFFFFF;font:800 96px/1 'Barlow Condensed',sans-serif;font-variant-numeric:tabular-nums}.ds-count__cap{margin-left:4px;color:#B4B4BC;font:700 15px/1.2 'Barlow Condensed',sans-serif}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Match-Day Calling Card",
+    "overview": "Every boss spawn is billed like a fixture, and the next one is on air in a broadcast lower-third, spoken in a Persona 5 homage: night-black ground, white ink, and one live red. The window is a native WPF desktop app (1100 x 720 default) used in a dim room, either glanced at between fullscreen sessions or left on a second monitor, so the countdown is built to read across a desk and everything else steps back.\n\nThe world is made of cut paper, not panels. Every block is a skewed or jagged polygon (rail items, banner, heading tabs, tags, buttons, frames), stacked as flat planes: a white cut behind a red plate behind black type. Halftone dots and red shards are the only texture, and they stay behind content. Boss names are dealt as ransom-note letters; when an alarm fires, a calling card slides in on its slant. Motion is a snap along the diagonal, never a soft fade.\n\nThis is an homage to the language only. No Atlus or Persona logos, characters, artwork or quoted text, and no Pearl Abyss or Melissia logos or game art. Boss portraits are original white-and-black stencil art; the red behind them always comes from the UI.",
+    "keyCharacteristics": [
+      "Black night ground, white ink, Phantom Red as the one live colour.",
+      "Every shape is a polygon drawn by `Shard` in 0..1 coordinates; nothing is rounded.",
+      "Layered cut planes (white offset cut under a red plate) instead of shadows.",
+      "Anton for display and ransom letters, Barlow Condensed tabular numerals for every time, Barlow for UI text.",
+      "Buttons are marked by a cut, an outline or a leading icon; headings are flat red tabs and never carry any of those.",
+      "Fast exponential snaps along the slant (120 to 200ms)."
+    ],
+    "rules": [
+      {
+        "name": "The One Live Colour Rule",
+        "body": "Red is the only hue. It marks the next, the selected, the armed and the firing; a screen with red on something that is none of those is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Comes From The UI Rule",
+        "body": "Boss art is white and black only. Red reaches a portrait from the plate or banner behind it, never from the artwork.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Clock Rule",
+        "body": "Every time, countdown, percentage or count is Barlow Condensed with tabular numerals, so digits never jitter as they tick.",
+        "section": "typography"
+      },
+      {
+        "name": "The Eleven Pixel Floor",
+        "body": "Functional text is never below 11px; the build's smallest is 12px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ransom Rule",
+        "body": "Ransom-note lettering is reserved for boss names in the banner (54px letters) and the alarm card (58px). It is never body or UI text.",
+        "section": "typography"
+      },
+      {
+        "name": "The Cut Plane Rule",
+        "body": "The offset white cut is a plane with its own ink, part of the silhouette, and it inverts with state (red on primary-button hover). It is never a grey or blurred shadow, and it never appears without a solid plate on top.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Texture Stays Behind Rule",
+        "body": "Halftone sits on fields, behind content, masked off before the text; it never runs under body copy.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do give every button a mark of action: the white cut under a solid plate, a 2px outline, or a leading Fluent icon (or more than one).",
+      "Do keep heading tabs flat: a red shard with white Anton text, no cut, no outline, no icon.",
+      "Do build every plate, frame, tag and track from a `Shard` polygon so content sets the size and the shape follows.",
+      "Do spend Phantom Red (#E5191C) only on what is next, selected, armed or firing.",
+      "Do set every time, countdown and count in Barlow Condensed with tabular numerals.",
+      "Do take icons from Segoe Fluent Icons / Segoe MDL2 Assets through `Ui.Glyph`.",
+      "Do show focus as a dashed 2px white outline that follows the control's own polygon.",
+      "Do use dashed outlines for \"off\" (alarm-off chips, muted status tag) so a silent alarm never looks armed.",
+      "Do keep halftone on red or black fields behind content, masked away from text.",
+      "Do animate as fast exponential snaps along the slant (120 to 200ms) and skip the signature motion when Windows client-area animation is off.",
+      "Do keep boss art white and black and let the red plate or banner behind it supply the colour."
+    ],
+    "donts": [
+      "Don't put a white cut, outline or icon on a heading tab; that is what makes a button.",
+      "Don't use Unicode symbols or emoji as icons (no arrows, triangles, stars or check marks typed as text).",
+      "Don't round any corner, on any element.",
+      "Don't use a coloured single-edge accent bar wider than 1px on a card, row or callout; full-perimeter strokes on frames and controls are fine.",
+      "Don't put a kicker or eyebrow label above a heading; status tags carry live data instead.",
+      "Don't set functional text below 11px.",
+      "Don't add a second accent hue, a gradient fill, a blur or a soft drop shadow.",
+      "Don't use Atlus or Persona logos, characters, artwork or quoted game text, or Pearl Abyss or Melissia logos or game art; this is a homage to the UI language only.",
+      "Don't fade things in softly; motion snaps."
+    ]
+  }
+}

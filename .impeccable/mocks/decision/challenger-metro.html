@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Melissia Boss Timer - Metro Live Tiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root { --cy:#1BA1E2; --grey:#2A2A2A; --dim:#7A7A7A; --mute:#A0A0A0; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  width:1100px; height:720px; overflow:hidden; position:relative;
+  background:#000; color:#fff;
+  font-family:"Segoe UI Light","Segoe UI","Open Sans",sans-serif; font-weight:300;
+  font-variant-numeric:tabular-nums;
+}
+
+/* Pivot tabs */
+.tabs { position:absolute; top:0; left:0; right:0; height:64px; padding:12px 45px 0;
+  display:flex; justify-content:space-between; align-items:baseline; }
+.tabs nav { display:flex; gap:32px; }
+.tabs a { font-size:36px; line-height:1; color:var(--dim); text-decoration:none; }
+.tabs a[aria-selected="true"] { color:#fff; }
+.clock { font-size:18px; font-weight:400; color:var(--mute); }
+
+/* Hero: next boss name cropped off the right edge */
+.cap { position:absolute; top:70px; left:45px; font-size:22px; line-height:28px; font-weight:400; color:var(--mute); }
+.cap b { color:var(--cy); font-weight:600; }
+h1 { position:absolute; top:60px; left:38px; white-space:nowrap; font-size:240px; line-height:1;
+  font-weight:300; letter-spacing:-.045em; color:#fff; }
+h1 span { color:#8C8C8C; }
+
+/* Tile grid */
+.grid { position:absolute; left:45px; top:345px; display:grid;
+  grid-template-columns:repeat(6,160px); grid-auto-rows:160px; gap:10px; }
+.tile { padding:12px 14px; display:flex; flex-direction:column; justify-content:space-between; background:var(--cy); }
+.tile.off { background:var(--grey); }
+.tile b { font-size:52px; line-height:1; font-weight:300; color:#fff; letter-spacing:-.02em; }
+.tile.off b { color:var(--mute); }
+.tile p { font-size:17px; line-height:1.25; font-weight:600; color:#000; }
+.tile.off p { color:var(--mute); }
+.tile em { display:block; font-style:normal; font-weight:400; font-size:13px; }
+
+.big { grid-column:1 / 4; grid-row:1 / 3; padding:14px 16px; }
+.big small { font-size:18px; line-height:22px; font-weight:600; color:#000; display:block; }
+.big small.low { font-weight:400; }
+.cd { font-size:220px; line-height:.8; letter-spacing:-.03em; margin-left:-8px; color:#fff; font-weight:300; }
+
+.foot { position:absolute; left:45px; right:45px; bottom:0; height:28px; line-height:28px;
+  font-size:13px; font-weight:400; color:var(--mute); white-space:nowrap; }
+</style>
+</head>
+<body>
+
+<header class="tabs">
+  <nav role="tablist" aria-label="Sections">
+    <a role="tab" aria-selected="true">schedule</a>
+    <a role="tab" aria-selected="false">bosses</a>
+    <a role="tab" aria-selected="false">sounds</a>
+    <a role="tab" aria-selected="false">settings</a>
+  </nav>
+  <div class="clock">wed 14 oct &nbsp; 04:52:12</div>
+</header>
+
+<p class="cap"><b>next spawn</b> &nbsp;05:00 &nbsp;+ bulgasal &nbsp;·&nbsp; alarm 04:55</p>
+<h1>kzarka <span>bulgasal</span></h1>
+
+<main class="grid">
+  <section class="tile big" aria-label="Next spawn countdown">
+    <small>starts in</small>
+    <div class="cd">7:48</div>
+    <small class="low">minutes : seconds &nbsp;·&nbsp; alarm 04:55 · war horn · 80%</small>
+  </section>
+
+  <div class="tile off"><b>05:15</b><p>uturi<em>alarm off</em></p></div>
+  <div class="tile"><b>05:30</b><p>golden pig king<em>alarm 5 min before</em></p></div>
+  <div class="tile off"><b>05:45</b><p>sangoon<em>alarm off</em></p></div>
+  <div class="tile"><b>09:00</b><p>bulgasal<em>alarm 5 min before</em></p></div>
+  <div class="tile off"><b>09:15</b><p>uturi<em>alarm off</em></p></div>
+  <div class="tile"><b>09:30</b><p>golden pig king<em>alarm 5 min before</em></p></div>
+</main>
+
+<footer class="foot">PC time zone UTC+07:00 (Bangkok, Hanoi, Jakarta) · schedule from wiki, checked 04:31 · times on wiki are GMT</footer>
+
+</body>
+</html>
